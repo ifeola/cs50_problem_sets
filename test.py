@@ -1,6 +1,3 @@
-import inflect
-
-names = ["ram", "shee", "reap"]
-
-p = inflect.engine()
-print(p.join(names))
+result = "as12312ac"
+for char in result:
+    print(result.)

@@ -1,3 +1,6 @@
-result = "as12312ac"
-for char in result:
-    print(result.)
+result = ["a", "b", "1", "2", "3", "4"]
+for char, index in result:
+    if type(char) == str:
+        print(index, char)
+    else:
+        print("Non-string character found")

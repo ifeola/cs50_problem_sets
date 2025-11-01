@@ -1,22 +1,26 @@
 def main():
-    plate = input("Plate: ")
+    plate: str = input("Plate: ")
     if is_valid(plate):
         print("Valid")
     else:
         print("Invalid")
 
 
-def is_valid(s):
-    if len(s) < 2 or len(s) > 6:
+def is_valid(s: str):
+    chars = list(s)
+    if len(chars) < 2 or len(chars) > 6:
         return False
-    if not s[0:1].isalpha():
+    if not chars[0].isalpha() and not chars[1].isalpha():
         return False
-    if s[0:1].isalpha() and s[-1].isalpha():
-        return False
-    for char in s:
-        if char in ",. ":
+    for index in range(len(chars)):
+        if chars[index] in ",. ":
             return False
-        if char == "0" and char
+        if chars[index].isdecimal():
+            if chars[index] == "0" and chars[index - 1].isalpha():
+                return False
+            for char in chars[index:]:
+                if char.isalpha():
+                    return False
     return True
 
 

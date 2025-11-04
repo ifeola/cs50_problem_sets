@@ -22,14 +22,14 @@ def reader(before):
         dict_reader = csv.DictReader(file)
         for row in dict_reader:
             name, house = row["name"], row["house"]
-            first, last = name.split(",")
-            person = {"first": first, "last": last.strip(), "house": house}
+            first, last = name.split(", ")
+            person = {"first": first, "last": last, "house": house}
             people.append(person)
     return people
 
 
 def writer(writer_file, after):
-    with open(writer_file, "a") as file:
+    with open(writer_file, "w", newline="") as file:
         dict_writer = csv.DictWriter(file, fieldnames=["first", "last", "house"])
         dict_writer.writeheader()
         for row in after:

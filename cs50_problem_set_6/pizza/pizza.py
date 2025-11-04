@@ -1,0 +1,31 @@
+from tabulate import tabulate
+import csv
+import sys
+
+
+def main():
+    if len(sys.argv) < 2:
+        sys.exit("Too few command-line arguments")
+    if len(sys.argv) > 2:
+        sys.exit("Too many command-line arguments")
+    if not sys.argv[1].endswith(".csv"):
+        sys.exit("Not a CSV file")
+
+    try:
+        table = pizza(sys.argv[1])
+        print(tabulate(table, headers="firstrow", tablefmt="grid"))
+    except FileNotFoundError:
+        sys.exit("File does not exist")
+
+
+def pizza(path):
+    pizzas = []
+    with open(path) as file:
+        reader = csv.reader(file)
+        for row in reader:
+            pizzas.append(row)
+    return pizzas
+
+
+if __name__ == "__main__":
+    main()

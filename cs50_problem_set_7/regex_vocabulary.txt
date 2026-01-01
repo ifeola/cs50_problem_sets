@@ -1,0 +1,61 @@
+Regex Vocabulary List
+
+Basic Characters
+
+-   a b c …: Literal characters
+-   .: Any character except newline
+
+Anchors
+
+-   ^: Start of string
+-   $: End of string
+-   \b: Word boundary
+-   \B: Not a word boundary
+
+Character Classes
+
+-   [abc]: Matches any of a, b, or c
+-   [^abc]: Matches anything except a, b, or c
+-   [a-z]: Range, matches a to z
+-   [0-9]: Digits 0 to 9
+
+Predefined Character Classes
+
+-   \d: Digit (0–9)
+-   \D: Not a digit
+-   \w: Word character (letters, digits, _)
+-   \W: Not a word character
+-   \s: Whitespace (space, tab, etc.)
+-   \S: Not whitespace
+
+Quantifiers
+
+-   *: 0 or more
+-   +: 1 or more
+-   ?: 0 or 1
+-   {n}: Exactly n times
+-   {n,}: n or more times
+-   {n,m}: Between n and m times
+
+Groups
+
+-   (abc): Capturing group
+-   (?:abc): Non‑capturing group
+-   (?=abc): Positive lookahead
+-   (?!abc): Negative lookahead
+-   (?<=abc): Positive lookbehind
+-   (?<!abc): Negative lookbehind
+
+Alternation
+
+-   a|b: Matches a OR b
+
+Escaping
+
+-   \: Escape special characters
+
+Special Tokens
+
+-   \n: Newline
+-   \t: Tab
+-   \r: Carriage return

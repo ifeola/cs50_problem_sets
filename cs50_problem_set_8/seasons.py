@@ -1,42 +1,52 @@
 from datetime import date, timedelta
-import re, sys
+import re, sys, inflect
 
 class Date:
-  def __init__(self, datee):
-    self.datee = datee
+	def __init__(self, datee):
+		self.datee = datee
     
-  @property
-  def datee(self):
-    return self._datee
+	@property
+	def datee(self):
+		return self._datee
   
-  @datee.setter  
-  def datee(self, datee):
-    format_string = '%Y-%m-%d'
-    formatted_date = datee.strftime(format_string)
-    match = re.search(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$", formatted_date)
-    if not match:
-      sys.exit("Invalid date of birth.")
-    self._datee = datee
+	@datee.setter  
+	def datee(self, datee):
+		match = re.search(r"^[0-9]{4}-[0-9]{2}-[0-9]{2}$", datee)
+		if not match:
+			sys.exit("Invalid date of birth.")
+		self._datee = datee
 
-  def __sub__(self, other):
-    today = self.datee - other.datee
-    today = today.days
-    return Date(today)
+	def subtract(self, other):
+		today = date.fromisoformat(self.datee) - date.fromisoformat(other.datee)
+		today = today.days
+		return today
   
-  def __str__(self):
-    return f"{self.datee}"
+	def __str__(self):
+		return f"{self.datee}"
 
 
 def main():
-  dob = Date(date.fromisoformat("1995-01-23"))
-  today_date = Date(date.today())
-  date_of_birth = today_date - dob
-  # minutes = convert_date_to_seconds(dob)
-  print(date_of_birth)
+  date_of_birth = input("Date of Birth: ")
+  result = convert(date_of_birth)
+  print(result)
+
+def convert(dob):
+	today_date = date.today()
+	format_string = "%Y-%m-%d"
+	formatted_date = today_date.strftime(format_string)
+  
+	date_of_birth = Date(dob)
+	t_date = Date(formatted_date)
+  
+	difference = t_date.subtract(date_of_birth)
+	minutes = convert_date_to_seconds(difference)
+	p = inflect.engine()
+	words = p.number_to_words(minutes, andword="")
+	return f"{words.capitalize()} minutes"
 
 
 def convert_date_to_seconds(days):
-  minutes = int(days) * 24 * 60
+  minutes = days * 24 * 60
   return minutes
 
 
